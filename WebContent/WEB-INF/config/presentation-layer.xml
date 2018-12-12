@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<context:component-scan base-package="com.multicampus.controller"></context:component-scan>
+	
+	<!-- HandlerMapping 등록 
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/login.do">login</prop>
+				<prop key="/logout.do">logout</prop>	
+				<prop key="/getBoardList.do">getBoardList</prop>
+				<prop key="/getBoard.do">getBoard</prop>	
+				<prop key="/insertBoard.do">insertBoard</prop>	
+				<prop key="/updateBoard.do">updateBoard</prop>	
+				<prop key="/deleteBoard.do">deleteBoard</prop>			
+			</props>
+		</property>
+	</bean>
+	-->
+	
+	<!-- Controller 등록 
+	<bean id="login" class="com.multicampus.controller.user.LoginController"></bean>
+	<bean id="logout" class="com.multicampus.controller.user.LogoutController"></bean>	
+	<bean id="getBoardList" class="com.multicampus.controller.board.GetBoardListController"></bean>
+	<bean id="getBoard" class="com.multicampus.controller.board.GetBoardController"></bean>
+	<bean id="insertBoard" class="com.multicampus.controller.board.InsertBoardController"></bean>
+	<bean id="updateBoard" class="com.multicampus.controller.board.UpdateBoardController"></bean>
+	<bean id="deleteBoard" class="com.multicampus.controller.board.DeleteBoardController"></bean>
+	-->
+</beans>
+
+
+

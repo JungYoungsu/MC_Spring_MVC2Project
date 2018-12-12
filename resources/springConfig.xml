@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:component-scan base-package="com.multicampus.biz"></context:component-scan>
+	<!-- 
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+ 	-->
+	<!-- 횡단관점에 해당하는 Advice 클래스 등록
+	<bean id="log" class="com.multicampus.biz.common.LogAdvice"></bean>
+	<bean id="afterReturning" class="com.multicampus.biz.common.AfterReturningAdvice"></bean>
+	<bean id="afterThrowing" class="com.multicampus.biz.common.AfterThrowingAdvice"></bean>
+	<bean id="around" class="com.multicampus.biz.common.AroundAdvice"></bean>
+	-->
+	<!-- AOP 설정 -->
+	<aop:config>
+		<aop:pointcut id="allPointcut" expression="execution(* com.multicampus.biz..*Impl.*(..))"/>
+		<aop:pointcut id="getPointcut" expression="execution(* com.multicampus.biz..*Impl.get*(..))"/>
+		
+		<aop:aspect ref="log">
+			<aop:before pointcut-ref="allPointcut" method="printLog"/>
+		</aop:aspect>
+		
+		<aop:aspect ref="afterReturning">
+			<aop:after-returning pointcut-ref="getPointcut" 
+								 method="afterLog" returning="returnObj"/>
+		</aop:aspect>
+		
+		<aop:aspect ref="afterThrowing">
+			<aop:after-throwing pointcut-ref="allPointcut" 
+			                    method="exceptionLog" throwing="exceptObj"/>
+		</aop:aspect>
+		
+		<aop:aspect ref="around">
+			<aop:around pointcut-ref="allPointcut" method="aroundLog"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- DataSource 등록 -->
+	<context:property-placeholder location="classpath:database.properties"/>
+	
+	<bean id="dataSource" 
+	      class="org.apache.commons.dbcp.BasicDataSource" 
+	      destroy-method="close">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	
+	<!-- JdbcTemplate 등록 -->
+	<bean class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Transaction 설정 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="txPointcut" 
+		expression="execution(* com.multicampus.biz..*Impl.*(..))"/>
+		
+		<aop:advisor pointcut-ref="txPointcut" 
+		             advice-ref="txAdvice"/>
+	</aop:config>	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
