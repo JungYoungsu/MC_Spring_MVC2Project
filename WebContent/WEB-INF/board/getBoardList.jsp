@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=EUC-KR"%>
+<%@page import="com.multicampus.biz.board.*" %>
+<%@page import="java.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 
@@ -42,7 +44,10 @@
 	<th bgcolor="orange" width="150">등록일</th>
 	<th bgcolor="orange" width="100">조회수</th>
 </tr>
-
+<%
+	List<BoardVO> list = (List) session.getAttribute("boardList");
+%>
+<%=list.size() %>건 검색됨.
 <c:forEach var="board" items="${boardList }">
 <tr>
 	<td>${board.seq }</td>
