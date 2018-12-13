@@ -11,6 +11,10 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAOSpring boardDAO;
 	
+	public BoardServiceImpl() {
+		System.out.println("===> BoardServiceImpl »ý¼º");
+	}
+	
 	public void insertBoard(BoardVO vo) {
 		boardDAO.insertBoard(vo);
 	}

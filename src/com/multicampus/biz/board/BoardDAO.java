@@ -25,6 +25,10 @@ public class BoardDAO {
 	private final String BOARD_GET    = "select * from board where seq=?";
 	private final String BOARD_LIST   = "select * from board order by seq desc";
 
+	public BoardDAO() {
+		System.out.println("===> BoardDAO 생성");
+	}
+	
 	// CRUD 기능의 메소드 구현
 	// 글 등록
 	public void insertBoard(BoardVO vo) {
