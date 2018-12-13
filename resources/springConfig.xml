@@ -45,6 +45,7 @@
 	
 	<!-- JDBC / Spring DAO 사용 여부 -->
 	<bean class="com.multicampus.biz.board.BoardDAOSpring"></bean>
+	<bean class="com.multicampus.biz.user.UserDAOSpring"></bean>
 	
 	<!-- DataSource 등록 -->
 	<context:property-placeholder location="classpath:database.properties"/>
