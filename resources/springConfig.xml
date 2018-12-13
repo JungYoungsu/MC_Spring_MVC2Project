@@ -82,6 +82,11 @@
 		<aop:advisor pointcut-ref="txPointcut" 
 		             advice-ref="txAdvice"/>
 	</aop:config>	
+	
+	<!-- 파일 업로드 설정 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000"></property>
+	</bean>
 </beans>
 
 

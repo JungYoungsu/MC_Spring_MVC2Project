@@ -1,5 +1,7 @@
 package com.multicampus.controller.board;
 
+import java.io.File;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.multicampus.biz.board.BoardService;
 import com.multicampus.biz.board.BoardVO;
@@ -16,12 +19,13 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	public BoardController() {
-		System.out.println("===> BoardController 积己");
-	}
-
 	@RequestMapping("/insertBoard.do")
 	public String insertBoard(BoardVO vo) throws Exception {
+		// 颇老 诀肺靛 贸府
+		MultipartFile uploadFile = vo.getUploadFile();
+		if (!uploadFile.isEmpty())
+			uploadFile.transferTo(new File("C:/" + uploadFile.getOriginalFilename()));
+
 		boardService.insertBoard(vo);
 		return "redirect:getBoardList.do";
 	}
