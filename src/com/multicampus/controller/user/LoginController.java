@@ -14,8 +14,10 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String loginView() throws Exception {
-		return "redirect:login.jsp";
+	public String loginView(UserVO vo) throws Exception {
+		vo.setId("test");
+		vo.setPassword("test");
+		return "forward:login.jsp";
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
