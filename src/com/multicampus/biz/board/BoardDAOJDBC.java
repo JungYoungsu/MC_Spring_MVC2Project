@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.multicampus.biz.common.JDBCUtil;
 
 // 2. DAO(Data Access Object) Å¬·¡½º
