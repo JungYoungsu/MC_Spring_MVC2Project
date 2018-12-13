@@ -7,8 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 // 2. DAO(Data Access Object) Å¬·¡½º
-@Repository
-public class BoardDAOSpring {
+
+public class BoardDAOSpring implements BoardDAO {
 	@Autowired
 	private JdbcTemplate spring;
 

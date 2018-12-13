@@ -43,6 +43,9 @@
 		</aop:aspect>
 	</aop:config>
 	
+	<!-- JDBC / Spring DAO 사용 여부 -->
+	<bean class="com.multicampus.biz.board.BoardDAOSpring"></bean>
+	
 	<!-- DataSource 등록 -->
 	<context:property-placeholder location="classpath:database.properties"/>
 	

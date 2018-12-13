@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 	@Autowired
-	private BoardDAOSpring boardDAO;
+	private BoardDAO boardDAO;
 	
 	public BoardServiceImpl() {
 		System.out.println("===> BoardServiceImpl »ý¼º");
