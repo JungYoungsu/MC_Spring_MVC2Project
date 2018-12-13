@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multicampus.biz.board.BoardService;
 import com.multicampus.biz.board.BoardVO;
@@ -44,7 +45,19 @@ public class BoardController {
 	}
 
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, Model model) throws Exception {
+	public String getBoardList(BoardVO vo, Model model, 
+			@RequestParam(value = "searchCondition", defaultValue = "") String searchCondition,
+			@RequestParam(value = "searchKeyword", defaultValue = "") String searchKeyword) throws Exception {
+		if (searchCondition.equals("TITLE")) {
+			vo.setTitle(searchKeyword);
+			vo.setContent("");
+		} else if (searchCondition.equals("CONTENT")) {
+			vo.setTitle("");
+			vo.setContent(searchKeyword);
+		} else {
+			vo.setTitle("");
+			vo.setContent("");
+		}
 		model.addAttribute("boardList", boardService.getBoardList(vo));
 		return "getBoardList";
 	}
