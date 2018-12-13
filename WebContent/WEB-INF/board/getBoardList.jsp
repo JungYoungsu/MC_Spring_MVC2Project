@@ -45,7 +45,7 @@
 	<th bgcolor="orange" width="100">조회수</th>
 </tr>
 <%
-	List<BoardVO> list = (List) session.getAttribute("boardList");
+	List<BoardVO> list = (List) request.getAttribute("boardList");
 %>
 <%=list.size() %>건 검색됨.
 <c:forEach var="board" items="${boardList }">
