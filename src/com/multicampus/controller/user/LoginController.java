@@ -10,15 +10,15 @@ import com.multicampus.biz.user.UserVO;
 public class LoginController {
 
 	@RequestMapping("/login.do")
-	public String handleRequest(UserVO vo, UserDAO userDAO) throws Exception {
-		System.out.println("로그인 기능 처리");
-		UserVO user = userDAO.getUser(vo);
-		if (user != null) {
-			return "getBoardList.do";
-		} else {
-			return "login.jsp";
-		}
-
+	public String login(UserVO vo, UserDAO userDAO) throws Exception {
+		if(userDAO.getUser(vo) != null) return "redirect:getBoardList.do";
+		else return "login";
 	}
 
 }
+
+
+
+
+
+
