@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.multicampus.biz.board.BoardListVO;
 import com.multicampus.biz.board.BoardService;
 import com.multicampus.biz.board.BoardVO;
 
@@ -24,11 +23,17 @@ public class BoardController {
 	
 	@RequestMapping("/transfer.do")
 	@ResponseBody
+	public List<BoardVO> transfer(BoardVO vo) { // JSON 사용 시에는 루트엘레멘트가 필요없으므로 BoardList 필요 없다
+		return boardService.getBoardList(vo);
+	}
+	
+/*	@RequestMapping("/transfer.do")
+	@ResponseBody
 	public BoardListVO transfer(BoardVO vo,BoardListVO listVO) {
 		List<BoardVO> boardList = boardService.getBoardList(vo);
 		listVO.setBoards(boardList);
 		return listVO;
-	}
+	}*/
 
 	@RequestMapping("/insertBoard.do")
 	public String insertBoard(BoardVO vo) throws Exception {

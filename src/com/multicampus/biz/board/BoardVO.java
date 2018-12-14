@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 // 1. VO(Value Object == Data Transfer Object) 클래스
@@ -23,7 +24,8 @@ public class BoardVO {
 	private int cnt;
 	@XmlTransient		// 비영속 = 해당 변수들은 XML로 변환하지 마라
 	private MultipartFile uploadFile;
-
+	
+	@JsonIgnore			// JSON 변환 때 무시 처리
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}
