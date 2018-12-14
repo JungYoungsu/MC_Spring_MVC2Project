@@ -21,7 +21,7 @@ public class BoardDAOJDBC implements BoardDAO{
 	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq=?";
 	private final String BOARD_GET    = "select * from board where seq=?";
-	private final String BOARD_LIST   = "select * from board order by seq desc";
+	private final String BOARD_LIST = "select * from board where title like '%'||?||'%' and content like '%'||?||'%' order by seq desc";
 
 	public BoardDAOJDBC() {
 		System.out.println("===> BoardDAO »ý¼º");
