@@ -40,7 +40,7 @@
 	</aop:config>
 
 	<!-- JDBC / Spring DAO 사용 여부 -->
-	<bean class="com.multicampus.biz.board.BoardDAOIbatis"></bean>
+	<bean class="com.multicampus.biz.board.BoardDAOMyBatis"></bean>
 	<bean class="com.multicampus.biz.user.UserDAOIbatis"></bean>
 
 	<!-- DataSource 등록 -->
@@ -89,10 +89,21 @@
 		<property name="configLocation" value="classpath:ibatis-map-config.xml"></property>
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
+
 	<bean class="org.springframework.orm.ibatis.SqlMapClientTemplate">
 		<property name="sqlMapClient" ref="sqlMapClient"></property>
 	</bean>
+
+	<!-- Spring MyBatis 연동 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-map-config.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession" />
+	</bean>
+
 </beans>
 
 
