@@ -48,7 +48,8 @@
 		</bean>
 	</mvc:interceptors>
 	
-	
+	<!-- 데이터 변환 설정 -->
+	<mvc:annotation-driven/>
 	
 	
 	

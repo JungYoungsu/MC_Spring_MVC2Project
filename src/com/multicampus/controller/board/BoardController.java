@@ -1,6 +1,7 @@
 package com.multicampus.controller.board;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.multicampus.biz.board.BoardListVO;
 import com.multicampus.biz.board.BoardService;
 import com.multicampus.biz.board.BoardVO;
 
@@ -18,6 +21,14 @@ import com.multicampus.biz.board.BoardVO;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	
+	@RequestMapping("/transfer.do")
+	@ResponseBody
+	public BoardListVO transfer(BoardVO vo,BoardListVO listVO) {
+		List<BoardVO> boardList = boardService.getBoardList(vo);
+		listVO.setBoards(boardList);
+		return listVO;
+	}
 
 	@RequestMapping("/insertBoard.do")
 	public String insertBoard(BoardVO vo) throws Exception {
@@ -54,13 +65,8 @@ public class BoardController {
 			@RequestParam(value = "searchKeyword", defaultValue = "") String searchKeyword) throws Exception {
 		if (searchCondition.equals("TITLE")) {
 			vo.setTitle(searchKeyword);
-			vo.setContent("");
 		} else if (searchCondition.equals("CONTENT")) {
-			vo.setTitle("");
 			vo.setContent(searchKeyword);
-		} else {
-			vo.setTitle("");
-			vo.setContent("");
 		}
 		model.addAttribute("boardList", boardService.getBoardList(vo));
 		return "getBoardList";
