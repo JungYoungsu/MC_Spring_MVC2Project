@@ -40,7 +40,7 @@
 	</aop:config>
 
 	<!-- JDBC / Spring DAO 사용 여부 -->
-	<bean class="com.multicampus.biz.board.BoardDAOMyBatis"></bean>
+	<bean class="com.multicampus.biz.board.BoardDAOMybatis"></bean>
 	<bean class="com.multicampus.biz.user.UserDAOIbatis"></bean>
 
 	<!-- DataSource 등록 -->
