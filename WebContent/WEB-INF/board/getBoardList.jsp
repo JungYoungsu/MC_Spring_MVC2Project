@@ -2,6 +2,7 @@
 <%@page import="com.multicampus.biz.board.*" %>
 <%@page import="java.util.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!-- 
 	JSTL(JSP Standard Tag Library) ÀÌ¶ץ?
@@ -53,7 +54,7 @@
 	<td>${board.seq }</td>
 	<td align="left"><a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
 	<td>${board.writer }</td>
-	<td>${board.regDate }</td>
+	<td><fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/></td>
 	<td>${board.cnt }</td>
 </tr>
 </c:forEach>
