@@ -24,6 +24,28 @@ public class BoardVO {
 	private int cnt;
 	@XmlTransient		// 비영속 = 해당 변수들은 XML로 변환하지 마라
 	private MultipartFile uploadFile;
+	@XmlTransient
+	private String searchCondition;
+	@XmlTransient
+	private String searchKeyword;
+	
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	
 	
 	@JsonIgnore			// JSON 변환 때 무시 처리
 	public MultipartFile getUploadFile() {

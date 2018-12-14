@@ -65,14 +65,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, Model model, 
-			@RequestParam(value = "searchCondition", defaultValue = "") String searchCondition,
-			@RequestParam(value = "searchKeyword", defaultValue = "") String searchKeyword) throws Exception {
-		if (searchCondition.equals("TITLE")) {
-			vo.setTitle(searchKeyword);
-		} else if (searchCondition.equals("CONTENT")) {
-			vo.setContent(searchKeyword);
-		}
+	public String getBoardList(BoardVO vo, Model model) throws Exception {
 		model.addAttribute("boardList", boardService.getBoardList(vo));
 		return "getBoardList";
 	}

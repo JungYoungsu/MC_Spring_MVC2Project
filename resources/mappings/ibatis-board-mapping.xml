@@ -4,37 +4,37 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap>
-	<typeAlias alias="board" type="com.multicampus.biz.board.BoardVO" />
-
+	<typeAlias alias="board" type="com.multicampus.biz.board.BoardVO"/>
+	
 	<resultMap class="board" id="boardResult">
-		<result property="seq" column="SEQ" />
-		<result property="title" column="TITLE" nullValue="NO Title..." />
-		<result property="writer" column="WRITER" nullValue="NO NAME..." />
-		<result property="content" column="CONTENT" nullValue="NO Contents..." />
-		<result property="regDate" column="REGDATE" />
-		<result property="cnt" column="CNT" />
+		<result property="seq" column="SEQ"/>
+		<result property="title" column="TITLE" nullValue="NO Title..."/>
+		<result property="writer" column="WRITER" nullValue="NO NAME"/>
+		<result property="content" column="CONTENT" nullValue="NO Contents....."/>
+		<result property="regDate" column="REGDATE"/>
+		<result property="cnt" column="CNT"/>
 	</resultMap>
-
+	
 	<insert id="insertBoard">
-		insert into board(seq, title, writer, content)
+		insert into board(seq, title, writer, content) 
 		values((select nvl(max(seq), 0)+1 from board),
 		#title#,
 		#writer#,
 		#content#)
 	</insert>
-
+	
 	<update id="updateBoard">
-		update board
-		set title=#title#,
-		content=#content#
+		update board 
+		set title=#title#, 
+		    content=#content# 
 		where seq=#seq#
 	</update>
-
+	
 	<delete id="deleteBoard">
-		delete board
+		delete board 
 		where seq=#seq#
 	</delete>
-
+	
 	<select id="getBoard" resultClass="board">
 		<![CDATA[
 		select * 
@@ -42,16 +42,27 @@
 		where seq = #seq#		
 		]]>
 	</select>
-
+	
 	<select id="getBoardList" resultMap="boardResult">
-		select *
-		from board
+		select * 
+		from board 
+		where 1 = 1 
+		<isEqual prepend="and" property="searchCondition" compareValue="TITLE">
+		title like '%'||#searchKeyword#||'%'
+		</isEqual>	
+		<isEqual prepend="and" property="searchCondition" compareValue="CONTENT">
+		content like '%'||#searchKeyword#||'%'
+		</isEqual>		
 		order by seq desc
 	</select>
 
-	<select id="getBoardCount" resultClass="int">
-		select count(*) from
-		board
-	</select>
-
 </sqlMap>
+
+
+
+
+
+
+
+
+
