@@ -6,6 +6,7 @@
 
 	<typeAliases>
 		<typeAlias alias="board" type="com.multicampus.biz.board.BoardVO" />
+		<typeAlias alias="user" type="com.multicampus.biz.user.UserVO"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -22,5 +23,6 @@
 
 	<mappers>
 		<mapper resource="mappings/mybatis-board-mapping.xml" />
+		<mapper resource="mappings/mybatis-user-mapping.xml" />
 	</mappers>
 </configuration>
