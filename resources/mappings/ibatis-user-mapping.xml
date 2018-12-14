@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="user" type="com.multicampus.biz.user.UserVO"/>
+	
+	<insert id="insertUser">
+	</insert>
+	
+	<update id="updateUser">
+	</update>
+	
+	<delete id="deleteUser">
+	</delete>
+	
+	<select id="getUser" resultClass="user">
+		<![CDATA[
+		select * 
+		from users 
+		where id = #id# 
+		  and password = #password#		
+		]]>
+	</select>
+	
+	<select id="getUserList" resultClass="user">
+	</select>
+	
+
+</sqlMap>
+
+
+
+
+
+
+
+
+
